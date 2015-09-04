@@ -1,0 +1,47 @@
+
+loglevel "verbose"
+
+
+/* Models */
+
+modeltypes (
+	UMLMM: "http://www.eclipse.org/uml2/5.0.0/UML"
+)
+
+/* in models for transformation */
+model ( name: "umlm", type: "UMLMM", path: "test-moola/scenario2/input/petstore_pojo.uml" )
+model ( name: "util_classes", type: "UMLMM", path: "test-moola/scenario2/input/util_classes.uml" )
+model ( name: "refinement", type: "UMLMM", path: "platform:/plugin/eu.artist.migration.umlprofilestore/umlprofiles/refinement.profile.uml" )
+model ( name: "javaUtil", type: "UMLMM", path: "pathmap://JAVA_LIBRARY/java-util.uml" )
+model ( name: "objectify", type: "UMLMM", path: "platform:/plugin/eu.artist.migration.umlprofilestore/umlprofiles/objectify_profile.profile.uml" )
+model ( name: "javaLang", type: "UMLMM", path: "pathmap://JAVA_LIBRARY/java-lang.uml" )
+model ( name: "objectifyTypes", type: "UMLMM", path: "platform:/plugin/eu.artist.migration.model.resources/libraries/objectify-appengine_java.uml" )
+
+/* optional - only required if we want to store the models of the transformation*/
+// model ( name: "umlm_out", type: "UMLMM", path: "test-moola/scenario2/output/petstore_pojo_out.uml" )
+// model ( name: "util_out", type: "UMLM", path: "test-moola/scenario2/output/petstore_util.uml")
+
+/* Operations */
+operation ( name: "OBJECTIFY_GETSET", type: "ATL/EMFTVM" ){
+	spec {
+		inputs UMLM: "UMLMM", UML_UTIL: "UMLMM", Refinement: "UMLMM", OBJECTIFY: "UMLMM", objectifyTypes: "UMLMM", javaUtil: "UMLMM", javaLang: "UMLMM"
+		outputs UMLM_OUT: "UMLMM", UML_UTIL_OUT: "UMLMM"
+	}
+	path = "test-moola/scenario2/"
+	module = "ObjectifyGetterSetter"
+}
+
+operation ( name: "GEN_CODE", type: "Acceleo" ){
+	project = "eu.artist.migration.modernization.uml2java"
+	main = "eu.artist.migration.modernization.uml2java.repackaged.gen.java.main.Uml2java"
+	target = "test-moola/scenario2/output"
+}
+
+
+/* Orchestration */
+run {	
+	( umlm_out, util_out ) = OBJECTIFY_GETSET( umlm, util_classes, refinement, objectify, objectifyTypes, javaUtil, javaLang  )
+	
+	m = GEN_CODE( umlm_out )
+	println "Generated code successfully. Code can be found at: " + m.getContent()	
+}

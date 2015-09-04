@@ -1,0 +1,662 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:javaProfile="http:///schemas/javaProfile/_wCZm0N0oEeSfefuUt0TgMw/3" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML">
+  <uml:Profile name="objectify" metamodelReference="/0/@packageImport.0">
+    <packageImport>
+      <importedPackage href="pathmap://UML_METAMODELS/UML.metamodel.uml#_0"/>
+    </packageImport>
+    <packageImport>
+      <importedPackage href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+    </packageImport>
+    <packagedElement xsi:type="uml:Package" name="com">
+      <packagedElement xsi:type="uml:Package" name="googlecode">
+        <packagedElement xsi:type="uml:Package" name="objectify">
+          <packagedElement xsi:type="uml:Package" name="annotation">
+            <packagedElement xsi:type="uml:Stereotype" name="Load" visibility="public">
+              <ownedAttribute name="value" visibility="public" association="/0/com/googlecode/objectify/annotation/value_Load_Class">
+                <type xsi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Class"/>
+                <lowerValue xsi:type="uml:LiteralInteger"/>
+                <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="*"/>
+              </ownedAttribute>
+              <ownedAttribute name="unless" visibility="public" association="/0/com/googlecode/objectify/annotation/unless_Load_Class">
+                <type xsi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Class"/>
+                <lowerValue xsi:type="uml:LiteralInteger"/>
+                <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="*"/>
+              </ownedAttribute>
+              <ownedAttribute name="base_Property" association="/0/com/googlecode/objectify/annotation/extension_Load_Property">
+                <type xsi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Property"/>
+                <lowerValue xsi:type="uml:LiteralInteger"/>
+                <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="1"/>
+              </ownedAttribute>
+              <ownedAttribute name="base_EnumerationLiteral" association="/0/com/googlecode/objectify/annotation/extension_Load_EnumerationLiteral">
+                <type xsi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#EnumerationLiteral"/>
+                <lowerValue xsi:type="uml:LiteralInteger"/>
+                <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="1"/>
+              </ownedAttribute>
+              <ownedAttribute name="base_Parameter" association="/0/com/googlecode/objectify/annotation/extension_Load_Parameter">
+                <type xsi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Parameter"/>
+                <lowerValue xsi:type="uml:LiteralInteger"/>
+                <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="1"/>
+              </ownedAttribute>
+            </packagedElement>
+            <packagedElement xsi:type="uml:Stereotype" name="Cache" visibility="public">
+              <ownedRule name="typeConstraint" constrainedElement="/0/com/googlecode/objectify/annotation/Cache">
+                <specification xsi:type="uml:OpaqueExpression" name="typeConstraintExpression">
+                  <body>not self.base_Type.oclIsUndefined() implies Set{uml::Stereotype,&#xD;
+					uml::Class, uml::Enumeration, uml::Interface}&#xD;
+					 -> includes(self.base_Type.oclType())</body>
+                  <language>OCL</language>
+                </specification>
+              </ownedRule>
+              <ownedAttribute name="expirationSeconds" visibility="public">
+                <type xsi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+                <lowerValue xsi:type="uml:LiteralInteger"/>
+                <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="1"/>
+              </ownedAttribute>
+              <ownedAttribute name="base_Type" association="/0/com/googlecode/objectify/annotation/extension_Cache_Type">
+                <type xsi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Type"/>
+                <lowerValue xsi:type="uml:LiteralInteger"/>
+                <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="1"/>
+              </ownedAttribute>
+            </packagedElement>
+            <packagedElement xsi:type="uml:Stereotype" name="Owner" visibility="public">
+              <ownedAttribute name="base_Property" association="/0/com/googlecode/objectify/annotation/extension_Owner_Property">
+                <type xsi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Property"/>
+                <lowerValue xsi:type="uml:LiteralInteger"/>
+                <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="1"/>
+              </ownedAttribute>
+              <ownedAttribute name="base_EnumerationLiteral" association="/0/com/googlecode/objectify/annotation/extension_Owner_EnumerationLiteral">
+                <type xsi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#EnumerationLiteral"/>
+                <lowerValue xsi:type="uml:LiteralInteger"/>
+                <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="1"/>
+              </ownedAttribute>
+            </packagedElement>
+            <packagedElement xsi:type="uml:Stereotype" name="Unindex" visibility="public">
+              <ownedRule name="typeConstraint" constrainedElement="/0/com/googlecode/objectify/annotation/Unindex">
+                <specification xsi:type="uml:OpaqueExpression" name="typeConstraintExpression">
+                  <body>not self.base_Type.oclIsUndefined() implies Set{uml::Stereotype,&#xD;
+					uml::Class, uml::Enumeration, uml::Interface}&#xD;
+					 -> includes(self.base_Type.oclType())</body>
+                  <language>OCL</language>
+                </specification>
+              </ownedRule>
+              <ownedAttribute name="value" visibility="public" association="/0/com/googlecode/objectify/annotation/value_Unindex_Class">
+                <type xsi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Class"/>
+                <lowerValue xsi:type="uml:LiteralInteger"/>
+                <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="*"/>
+              </ownedAttribute>
+              <ownedAttribute name="base_Property" association="/0/com/googlecode/objectify/annotation/extension_Unindex_Property">
+                <type xsi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Property"/>
+                <lowerValue xsi:type="uml:LiteralInteger"/>
+                <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="1"/>
+              </ownedAttribute>
+              <ownedAttribute name="base_EnumerationLiteral" association="/0/com/googlecode/objectify/annotation/extension_Unindex_EnumerationLiteral">
+                <type xsi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#EnumerationLiteral"/>
+                <lowerValue xsi:type="uml:LiteralInteger"/>
+                <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="1"/>
+              </ownedAttribute>
+              <ownedAttribute name="base_Type" association="/0/com/googlecode/objectify/annotation/extension_Unindex_Type">
+                <type xsi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Type"/>
+                <lowerValue xsi:type="uml:LiteralInteger"/>
+                <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="1"/>
+              </ownedAttribute>
+            </packagedElement>
+            <packagedElement xsi:type="uml:Stereotype" name="Embed" visibility="public">
+              <ownedRule name="typeConstraint" constrainedElement="/0/com/googlecode/objectify/annotation/Embed">
+                <specification xsi:type="uml:OpaqueExpression" name="typeConstraintExpression">
+                  <body>not self.base_Type.oclIsUndefined() implies Set{uml::Stereotype,&#xD;
+					uml::Class, uml::Enumeration, uml::Interface}&#xD;
+					 -> includes(self.base_Type.oclType())</body>
+                  <language>OCL</language>
+                </specification>
+              </ownedRule>
+              <ownedAttribute name="base_Type" association="/0/com/googlecode/objectify/annotation/extension_Embed_Type">
+                <type xsi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Type"/>
+                <lowerValue xsi:type="uml:LiteralInteger"/>
+                <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="1"/>
+              </ownedAttribute>
+            </packagedElement>
+            <packagedElement xsi:type="uml:Stereotype" name="Entity" visibility="public">
+              <ownedRule name="typeConstraint" constrainedElement="/0/com/googlecode/objectify/annotation/Entity">
+                <specification xsi:type="uml:OpaqueExpression" name="typeConstraintExpression">
+                  <body>not self.base_Type.oclIsUndefined() implies Set{uml::Stereotype,&#xD;
+					uml::Class, uml::Enumeration, uml::Interface}&#xD;
+					 -> includes(self.base_Type.oclType())</body>
+                  <language>OCL</language>
+                </specification>
+              </ownedRule>
+              <ownedAttribute name="name" visibility="public">
+                <type xsi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+                <lowerValue xsi:type="uml:LiteralInteger"/>
+                <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="1"/>
+              </ownedAttribute>
+              <ownedAttribute name="base_Type" association="/0/com/googlecode/objectify/annotation/extension_Entity_Type">
+                <type xsi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Type"/>
+                <lowerValue xsi:type="uml:LiteralInteger"/>
+                <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="1"/>
+              </ownedAttribute>
+            </packagedElement>
+            <packagedElement xsi:type="uml:Stereotype" name="Serialize" visibility="public">
+              <ownedRule name="typeConstraint" constrainedElement="/0/com/googlecode/objectify/annotation/Serialize">
+                <specification xsi:type="uml:OpaqueExpression" name="typeConstraintExpression">
+                  <body>not self.base_Type.oclIsUndefined() implies Set{uml::Stereotype,&#xD;
+					uml::Class, uml::Enumeration, uml::Interface}&#xD;
+					 -> includes(self.base_Type.oclType())</body>
+                  <language>OCL</language>
+                </specification>
+              </ownedRule>
+              <ownedAttribute name="zip" visibility="public">
+                <type xsi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+                <lowerValue xsi:type="uml:LiteralInteger"/>
+                <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="1"/>
+              </ownedAttribute>
+              <ownedAttribute name="compressionLevel" visibility="public">
+                <type xsi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+                <lowerValue xsi:type="uml:LiteralInteger"/>
+                <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="1"/>
+              </ownedAttribute>
+              <ownedAttribute name="base_Type" association="/0/com/googlecode/objectify/annotation/extension_Serialize_Type">
+                <type xsi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Type"/>
+                <lowerValue xsi:type="uml:LiteralInteger"/>
+                <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="1"/>
+              </ownedAttribute>
+              <ownedAttribute name="base_Property" association="/0/com/googlecode/objectify/annotation/extension_Serialize_Property">
+                <type xsi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Property"/>
+                <lowerValue xsi:type="uml:LiteralInteger"/>
+                <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="1"/>
+              </ownedAttribute>
+              <ownedAttribute name="base_EnumerationLiteral" association="/0/com/googlecode/objectify/annotation/extension_Serialize_EnumerationLiteral">
+                <type xsi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#EnumerationLiteral"/>
+                <lowerValue xsi:type="uml:LiteralInteger"/>
+                <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="1"/>
+              </ownedAttribute>
+            </packagedElement>
+            <packagedElement xsi:type="uml:Stereotype" name="Translate" visibility="public">
+              <ownedRule name="methodConstraint" constrainedElement="/0/com/googlecode/objectify/annotation/Translate">
+                <specification xsi:type="uml:OpaqueExpression" name="methodConstraintExpression">
+                  <body>not self.base_Property.oclIsUndefined() implies&#xD;
+					 self.base_Property.oclContainer().oclIsTypeOf(uml::Stereotype)</body>
+                  <language>OCL</language>
+                </specification>
+              </ownedRule>
+              <ownedAttribute name="value" visibility="public" association="/0/com/googlecode/objectify/annotation/value_Translate_Class">
+                <type xsi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Class"/>
+                <lowerValue xsi:type="uml:LiteralInteger" value="1"/>
+                <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="1"/>
+              </ownedAttribute>
+              <ownedAttribute name="early" visibility="public">
+                <type xsi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+                <lowerValue xsi:type="uml:LiteralInteger"/>
+                <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="1"/>
+              </ownedAttribute>
+              <ownedAttribute name="base_Property" association="/0/com/googlecode/objectify/annotation/extension_Translate_Property">
+                <type xsi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Property"/>
+                <lowerValue xsi:type="uml:LiteralInteger"/>
+                <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="1"/>
+              </ownedAttribute>
+              <ownedAttribute name="base_EnumerationLiteral" association="/0/com/googlecode/objectify/annotation/extension_Translate_EnumerationLiteral">
+                <type xsi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#EnumerationLiteral"/>
+                <lowerValue xsi:type="uml:LiteralInteger"/>
+                <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="1"/>
+              </ownedAttribute>
+              <ownedAttribute name="base_Operation" association="/0/com/googlecode/objectify/annotation/extension_Translate_Operation">
+                <type xsi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Operation"/>
+                <lowerValue xsi:type="uml:LiteralInteger"/>
+                <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="1"/>
+              </ownedAttribute>
+              <ownedAttribute name="base_Property" association="/0/com/googlecode/objectify/annotation/extension_Translate_Property.1">
+                <type xsi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Property"/>
+                <lowerValue xsi:type="uml:LiteralInteger"/>
+                <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="1"/>
+              </ownedAttribute>
+            </packagedElement>
+            <packagedElement xsi:type="uml:Stereotype" name="OnSave" visibility="public">
+              <ownedRule name="methodConstraint" constrainedElement="/0/com/googlecode/objectify/annotation/OnSave">
+                <specification xsi:type="uml:OpaqueExpression" name="methodConstraintExpression">
+                  <body>not self.base_Property.oclIsUndefined() implies&#xD;
+					 self.base_Property.oclContainer().oclIsTypeOf(uml::Stereotype)</body>
+                  <language>OCL</language>
+                </specification>
+              </ownedRule>
+              <ownedAttribute name="base_Operation" association="/0/com/googlecode/objectify/annotation/extension_OnSave_Operation">
+                <type xsi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Operation"/>
+                <lowerValue xsi:type="uml:LiteralInteger"/>
+                <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="1"/>
+              </ownedAttribute>
+              <ownedAttribute name="base_Property" association="/0/com/googlecode/objectify/annotation/extension_OnSave_Property">
+                <type xsi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Property"/>
+                <lowerValue xsi:type="uml:LiteralInteger"/>
+                <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="1"/>
+              </ownedAttribute>
+            </packagedElement>
+            <packagedElement xsi:type="uml:Stereotype" name="Parent" visibility="public">
+              <ownedAttribute name="base_Property" association="/0/com/googlecode/objectify/annotation/extension_Parent_Property">
+                <type xsi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Property"/>
+                <lowerValue xsi:type="uml:LiteralInteger"/>
+                <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="1"/>
+              </ownedAttribute>
+              <ownedAttribute name="base_EnumerationLiteral" association="/0/com/googlecode/objectify/annotation/extension_Parent_EnumerationLiteral">
+                <type xsi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#EnumerationLiteral"/>
+                <lowerValue xsi:type="uml:LiteralInteger"/>
+                <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="1"/>
+              </ownedAttribute>
+            </packagedElement>
+            <packagedElement xsi:type="uml:Stereotype" name="AlsoLoad" visibility="public">
+              <ownedAttribute name="value" visibility="public">
+                <type xsi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+                <lowerValue xsi:type="uml:LiteralInteger"/>
+                <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="*"/>
+              </ownedAttribute>
+              <ownedAttribute name="base_Property" association="/0/com/googlecode/objectify/annotation/extension_AlsoLoad_Property">
+                <type xsi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Property"/>
+                <lowerValue xsi:type="uml:LiteralInteger"/>
+                <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="1"/>
+              </ownedAttribute>
+              <ownedAttribute name="base_EnumerationLiteral" association="/0/com/googlecode/objectify/annotation/extension_AlsoLoad_EnumerationLiteral">
+                <type xsi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#EnumerationLiteral"/>
+                <lowerValue xsi:type="uml:LiteralInteger"/>
+                <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="1"/>
+              </ownedAttribute>
+              <ownedAttribute name="base_Parameter" association="/0/com/googlecode/objectify/annotation/extension_AlsoLoad_Parameter">
+                <type xsi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Parameter"/>
+                <lowerValue xsi:type="uml:LiteralInteger"/>
+                <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="1"/>
+              </ownedAttribute>
+            </packagedElement>
+            <packagedElement xsi:type="uml:Stereotype" name="EmbedMap" visibility="public">
+              <ownedAttribute name="base_Property" association="/0/com/googlecode/objectify/annotation/extension_EmbedMap_Property">
+                <type xsi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Property"/>
+                <lowerValue xsi:type="uml:LiteralInteger"/>
+                <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="1"/>
+              </ownedAttribute>
+              <ownedAttribute name="base_EnumerationLiteral" association="/0/com/googlecode/objectify/annotation/extension_EmbedMap_EnumerationLiteral">
+                <type xsi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#EnumerationLiteral"/>
+                <lowerValue xsi:type="uml:LiteralInteger"/>
+                <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="1"/>
+              </ownedAttribute>
+            </packagedElement>
+            <packagedElement xsi:type="uml:Stereotype" name="Index" visibility="public">
+              <ownedRule name="typeConstraint" constrainedElement="/0/com/googlecode/objectify/annotation/Index">
+                <specification xsi:type="uml:OpaqueExpression" name="typeConstraintExpression">
+                  <body>not self.base_Type.oclIsUndefined() implies Set{uml::Stereotype,&#xD;
+					uml::Class, uml::Enumeration, uml::Interface}&#xD;
+					 -> includes(self.base_Type.oclType())</body>
+                  <language>OCL</language>
+                </specification>
+              </ownedRule>
+              <ownedAttribute name="value" visibility="public" association="/0/com/googlecode/objectify/annotation/value_Index_Class">
+                <type xsi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Class"/>
+                <lowerValue xsi:type="uml:LiteralInteger"/>
+                <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="*"/>
+              </ownedAttribute>
+              <ownedAttribute name="base_Property" association="/0/com/googlecode/objectify/annotation/extension_Index_Property">
+                <type xsi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Property"/>
+                <lowerValue xsi:type="uml:LiteralInteger"/>
+                <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="1"/>
+              </ownedAttribute>
+              <ownedAttribute name="base_EnumerationLiteral" association="/0/com/googlecode/objectify/annotation/extension_Index_EnumerationLiteral">
+                <type xsi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#EnumerationLiteral"/>
+                <lowerValue xsi:type="uml:LiteralInteger"/>
+                <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="1"/>
+              </ownedAttribute>
+              <ownedAttribute name="base_Type" association="/0/com/googlecode/objectify/annotation/extension_Index_Type">
+                <type xsi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Type"/>
+                <lowerValue xsi:type="uml:LiteralInteger"/>
+                <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="1"/>
+              </ownedAttribute>
+            </packagedElement>
+            <packagedElement xsi:type="uml:Stereotype" name="OnLoad" visibility="public">
+              <ownedRule name="methodConstraint" constrainedElement="/0/com/googlecode/objectify/annotation/OnLoad">
+                <specification xsi:type="uml:OpaqueExpression" name="methodConstraintExpression">
+                  <body>not self.base_Property.oclIsUndefined() implies&#xD;
+					 self.base_Property.oclContainer().oclIsTypeOf(uml::Stereotype)</body>
+                  <language>OCL</language>
+                </specification>
+              </ownedRule>
+              <ownedAttribute name="base_Operation" association="/0/com/googlecode/objectify/annotation/extension_OnLoad_Operation">
+                <type xsi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Operation"/>
+                <lowerValue xsi:type="uml:LiteralInteger"/>
+                <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="1"/>
+              </ownedAttribute>
+              <ownedAttribute name="base_Property" association="/0/com/googlecode/objectify/annotation/extension_OnLoad_Property">
+                <type xsi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Property"/>
+                <lowerValue xsi:type="uml:LiteralInteger"/>
+                <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="1"/>
+              </ownedAttribute>
+            </packagedElement>
+            <packagedElement xsi:type="uml:Stereotype" name="Ignore" visibility="public">
+              <ownedAttribute name="base_Property" association="/0/com/googlecode/objectify/annotation/extension_Ignore_Property">
+                <type xsi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Property"/>
+                <lowerValue xsi:type="uml:LiteralInteger"/>
+                <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="1"/>
+              </ownedAttribute>
+              <ownedAttribute name="base_EnumerationLiteral" association="/0/com/googlecode/objectify/annotation/extension_Ignore_EnumerationLiteral">
+                <type xsi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#EnumerationLiteral"/>
+                <lowerValue xsi:type="uml:LiteralInteger"/>
+                <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="1"/>
+              </ownedAttribute>
+            </packagedElement>
+            <packagedElement xsi:type="uml:Stereotype" name="IgnoreSave" visibility="public">
+              <ownedAttribute name="value" visibility="public" association="/0/com/googlecode/objectify/annotation/value_IgnoreSave_Class">
+                <type xsi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Class"/>
+                <lowerValue xsi:type="uml:LiteralInteger"/>
+                <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="*"/>
+              </ownedAttribute>
+              <ownedAttribute name="base_Property" association="/0/com/googlecode/objectify/annotation/extension_IgnoreSave_Property">
+                <type xsi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Property"/>
+                <lowerValue xsi:type="uml:LiteralInteger"/>
+                <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="1"/>
+              </ownedAttribute>
+              <ownedAttribute name="base_EnumerationLiteral" association="/0/com/googlecode/objectify/annotation/extension_IgnoreSave_EnumerationLiteral">
+                <type xsi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#EnumerationLiteral"/>
+                <lowerValue xsi:type="uml:LiteralInteger"/>
+                <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="1"/>
+              </ownedAttribute>
+            </packagedElement>
+            <packagedElement xsi:type="uml:Stereotype" name="Id" visibility="public">
+              <ownedAttribute name="base_Property" association="/0/com/googlecode/objectify/annotation/extension_Id_Property">
+                <type xsi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Property"/>
+                <lowerValue xsi:type="uml:LiteralInteger"/>
+                <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="1"/>
+              </ownedAttribute>
+              <ownedAttribute name="base_EnumerationLiteral" association="/0/com/googlecode/objectify/annotation/extension_Id_EnumerationLiteral">
+                <type xsi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#EnumerationLiteral"/>
+                <lowerValue xsi:type="uml:LiteralInteger"/>
+                <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="1"/>
+              </ownedAttribute>
+            </packagedElement>
+            <packagedElement xsi:type="uml:Stereotype" name="IgnoreLoad" visibility="public">
+              <ownedAttribute name="base_Property" association="/0/com/googlecode/objectify/annotation/extension_IgnoreLoad_Property">
+                <type xsi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Property"/>
+                <lowerValue xsi:type="uml:LiteralInteger"/>
+                <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="1"/>
+              </ownedAttribute>
+              <ownedAttribute name="base_EnumerationLiteral" association="/0/com/googlecode/objectify/annotation/extension_IgnoreLoad_EnumerationLiteral">
+                <type xsi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#EnumerationLiteral"/>
+                <lowerValue xsi:type="uml:LiteralInteger"/>
+                <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="1"/>
+              </ownedAttribute>
+            </packagedElement>
+            <packagedElement xsi:type="uml:Stereotype" name="EntitySubclass" visibility="public">
+              <ownedRule name="typeConstraint" constrainedElement="/0/com/googlecode/objectify/annotation/EntitySubclass">
+                <specification xsi:type="uml:OpaqueExpression" name="typeConstraintExpression">
+                  <body>not self.base_Type.oclIsUndefined() implies Set{uml::Stereotype,&#xD;
+					uml::Class, uml::Enumeration, uml::Interface}&#xD;
+					 -> includes(self.base_Type.oclType())</body>
+                  <language>OCL</language>
+                </specification>
+              </ownedRule>
+              <ownedAttribute name="name" visibility="public">
+                <type xsi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+                <lowerValue xsi:type="uml:LiteralInteger"/>
+                <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="1"/>
+              </ownedAttribute>
+              <ownedAttribute name="index" visibility="public">
+                <type xsi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+                <lowerValue xsi:type="uml:LiteralInteger"/>
+                <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="1"/>
+              </ownedAttribute>
+              <ownedAttribute name="alsoLoad" visibility="public">
+                <type xsi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+                <lowerValue xsi:type="uml:LiteralInteger"/>
+                <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="*"/>
+              </ownedAttribute>
+              <ownedAttribute name="base_Type" association="/0/com/googlecode/objectify/annotation/extension_EntitySubclass_Type">
+                <type xsi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Type"/>
+                <lowerValue xsi:type="uml:LiteralInteger"/>
+                <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="1"/>
+              </ownedAttribute>
+            </packagedElement>
+            <packagedElement xsi:type="uml:Stereotype" name="Mapify" visibility="public">
+              <ownedAttribute name="value" visibility="public" association="/0/com/googlecode/objectify/annotation/value_Mapify_Class">
+                <type xsi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Class"/>
+                <lowerValue xsi:type="uml:LiteralInteger" value="1"/>
+                <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="1"/>
+              </ownedAttribute>
+              <ownedAttribute name="base_Property" association="/0/com/googlecode/objectify/annotation/extension_Mapify_Property">
+                <type xsi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Property"/>
+                <lowerValue xsi:type="uml:LiteralInteger"/>
+                <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="1"/>
+              </ownedAttribute>
+              <ownedAttribute name="base_EnumerationLiteral" association="/0/com/googlecode/objectify/annotation/extension_Mapify_EnumerationLiteral">
+                <type xsi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#EnumerationLiteral"/>
+                <lowerValue xsi:type="uml:LiteralInteger"/>
+                <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="1"/>
+              </ownedAttribute>
+            </packagedElement>
+            <packagedElement xsi:type="uml:Extension" name="extension_Load_Property" memberEnd="/0/com/googlecode/objectify/annotation/Load/base_Property /0/com/googlecode/objectify/annotation/extension_Load_Property/extension_Property">
+              <ownedEnd xsi:type="uml:ExtensionEnd" name="extension_Property" type="/0/com/googlecode/objectify/annotation/Load" aggregation="composite" association="/0/com/googlecode/objectify/annotation/extension_Load_Property"/>
+            </packagedElement>
+            <packagedElement xsi:type="uml:Extension" name="extension_Load_EnumerationLiteral" memberEnd="/0/com/googlecode/objectify/annotation/Load/base_EnumerationLiteral /0/com/googlecode/objectify/annotation/extension_Load_EnumerationLiteral/extension_EnumerationLiteral">
+              <ownedEnd xsi:type="uml:ExtensionEnd" name="extension_EnumerationLiteral" type="/0/com/googlecode/objectify/annotation/Load" aggregation="composite" association="/0/com/googlecode/objectify/annotation/extension_Load_EnumerationLiteral">
+                <lowerValue xsi:type="uml:LiteralInteger"/>
+                <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="1"/>
+              </ownedEnd>
+            </packagedElement>
+            <packagedElement xsi:type="uml:Extension" name="extension_Load_Parameter" memberEnd="/0/com/googlecode/objectify/annotation/Load/base_Parameter /0/com/googlecode/objectify/annotation/extension_Load_Parameter/extension_Parameter">
+              <ownedEnd xsi:type="uml:ExtensionEnd" name="extension_Parameter" type="/0/com/googlecode/objectify/annotation/Load" aggregation="composite" association="/0/com/googlecode/objectify/annotation/extension_Load_Parameter"/>
+            </packagedElement>
+            <packagedElement xsi:type="uml:Extension" name="extension_Cache_Type" memberEnd="/0/com/googlecode/objectify/annotation/Cache/base_Type /0/com/googlecode/objectify/annotation/extension_Cache_Type/extension_Type">
+              <ownedEnd xsi:type="uml:ExtensionEnd" name="extension_Type" type="/0/com/googlecode/objectify/annotation/Cache" aggregation="composite" association="/0/com/googlecode/objectify/annotation/extension_Cache_Type"/>
+            </packagedElement>
+            <packagedElement xsi:type="uml:Extension" name="extension_Owner_Property" memberEnd="/0/com/googlecode/objectify/annotation/Owner/base_Property /0/com/googlecode/objectify/annotation/extension_Owner_Property/extension_Property">
+              <ownedEnd xsi:type="uml:ExtensionEnd" name="extension_Property" type="/0/com/googlecode/objectify/annotation/Owner" aggregation="composite" association="/0/com/googlecode/objectify/annotation/extension_Owner_Property"/>
+            </packagedElement>
+            <packagedElement xsi:type="uml:Extension" name="extension_Owner_EnumerationLiteral" memberEnd="/0/com/googlecode/objectify/annotation/Owner/base_EnumerationLiteral /0/com/googlecode/objectify/annotation/extension_Owner_EnumerationLiteral/extension_EnumerationLiteral">
+              <ownedEnd xsi:type="uml:ExtensionEnd" name="extension_EnumerationLiteral" type="/0/com/googlecode/objectify/annotation/Owner" aggregation="composite" association="/0/com/googlecode/objectify/annotation/extension_Owner_EnumerationLiteral">
+                <lowerValue xsi:type="uml:LiteralInteger"/>
+                <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="1"/>
+              </ownedEnd>
+            </packagedElement>
+            <packagedElement xsi:type="uml:Extension" name="extension_Unindex_Property" memberEnd="/0/com/googlecode/objectify/annotation/Unindex/base_Property /0/com/googlecode/objectify/annotation/extension_Unindex_Property/extension_Property">
+              <ownedEnd xsi:type="uml:ExtensionEnd" name="extension_Property" type="/0/com/googlecode/objectify/annotation/Unindex" aggregation="composite" association="/0/com/googlecode/objectify/annotation/extension_Unindex_Property"/>
+            </packagedElement>
+            <packagedElement xsi:type="uml:Extension" name="extension_Unindex_EnumerationLiteral" memberEnd="/0/com/googlecode/objectify/annotation/Unindex/base_EnumerationLiteral /0/com/googlecode/objectify/annotation/extension_Unindex_EnumerationLiteral/extension_EnumerationLiteral">
+              <ownedEnd xsi:type="uml:ExtensionEnd" name="extension_EnumerationLiteral" type="/0/com/googlecode/objectify/annotation/Unindex" aggregation="composite" association="/0/com/googlecode/objectify/annotation/extension_Unindex_EnumerationLiteral">
+                <lowerValue xsi:type="uml:LiteralInteger"/>
+                <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="1"/>
+              </ownedEnd>
+            </packagedElement>
+            <packagedElement xsi:type="uml:Extension" name="extension_Unindex_Type" memberEnd="/0/com/googlecode/objectify/annotation/Unindex/base_Type /0/com/googlecode/objectify/annotation/extension_Unindex_Type/extension_Type">
+              <ownedEnd xsi:type="uml:ExtensionEnd" name="extension_Type" type="/0/com/googlecode/objectify/annotation/Unindex" aggregation="composite" association="/0/com/googlecode/objectify/annotation/extension_Unindex_Type"/>
+            </packagedElement>
+            <packagedElement xsi:type="uml:Extension" name="extension_Embed_Type" memberEnd="/0/com/googlecode/objectify/annotation/Embed/base_Type /0/com/googlecode/objectify/annotation/extension_Embed_Type/extension_Type">
+              <ownedEnd xsi:type="uml:ExtensionEnd" name="extension_Type" type="/0/com/googlecode/objectify/annotation/Embed" aggregation="composite" association="/0/com/googlecode/objectify/annotation/extension_Embed_Type"/>
+            </packagedElement>
+            <packagedElement xsi:type="uml:Extension" name="extension_Entity_Type" memberEnd="/0/com/googlecode/objectify/annotation/Entity/base_Type /0/com/googlecode/objectify/annotation/extension_Entity_Type/extension_Type">
+              <ownedEnd xsi:type="uml:ExtensionEnd" name="extension_Type" type="/0/com/googlecode/objectify/annotation/Entity" aggregation="composite" association="/0/com/googlecode/objectify/annotation/extension_Entity_Type"/>
+            </packagedElement>
+            <packagedElement xsi:type="uml:Extension" name="extension_Serialize_Type" memberEnd="/0/com/googlecode/objectify/annotation/Serialize/base_Type /0/com/googlecode/objectify/annotation/extension_Serialize_Type/extension_Type">
+              <ownedEnd xsi:type="uml:ExtensionEnd" name="extension_Type" type="/0/com/googlecode/objectify/annotation/Serialize" aggregation="composite" association="/0/com/googlecode/objectify/annotation/extension_Serialize_Type"/>
+            </packagedElement>
+            <packagedElement xsi:type="uml:Extension" name="extension_Serialize_Property" memberEnd="/0/com/googlecode/objectify/annotation/Serialize/base_Property /0/com/googlecode/objectify/annotation/extension_Serialize_Property/extension_Property">
+              <ownedEnd xsi:type="uml:ExtensionEnd" name="extension_Property" type="/0/com/googlecode/objectify/annotation/Serialize" aggregation="composite" association="/0/com/googlecode/objectify/annotation/extension_Serialize_Property"/>
+            </packagedElement>
+            <packagedElement xsi:type="uml:Extension" name="extension_Serialize_EnumerationLiteral" memberEnd="/0/com/googlecode/objectify/annotation/Serialize/base_EnumerationLiteral /0/com/googlecode/objectify/annotation/extension_Serialize_EnumerationLiteral/extension_EnumerationLiteral">
+              <ownedEnd xsi:type="uml:ExtensionEnd" name="extension_EnumerationLiteral" type="/0/com/googlecode/objectify/annotation/Serialize" aggregation="composite" association="/0/com/googlecode/objectify/annotation/extension_Serialize_EnumerationLiteral">
+                <lowerValue xsi:type="uml:LiteralInteger"/>
+                <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="1"/>
+              </ownedEnd>
+            </packagedElement>
+            <packagedElement xsi:type="uml:Extension" name="extension_Translate_Property" memberEnd="/0/com/googlecode/objectify/annotation/Translate/base_Property /0/com/googlecode/objectify/annotation/extension_Translate_Property/extension_Property">
+              <ownedEnd xsi:type="uml:ExtensionEnd" name="extension_Property" type="/0/com/googlecode/objectify/annotation/Translate" aggregation="composite" association="/0/com/googlecode/objectify/annotation/extension_Translate_Property"/>
+            </packagedElement>
+            <packagedElement xsi:type="uml:Extension" name="extension_Translate_EnumerationLiteral" memberEnd="/0/com/googlecode/objectify/annotation/Translate/base_EnumerationLiteral /0/com/googlecode/objectify/annotation/extension_Translate_EnumerationLiteral/extension_EnumerationLiteral">
+              <ownedEnd xsi:type="uml:ExtensionEnd" name="extension_EnumerationLiteral" type="/0/com/googlecode/objectify/annotation/Translate" aggregation="composite" association="/0/com/googlecode/objectify/annotation/extension_Translate_EnumerationLiteral">
+                <lowerValue xsi:type="uml:LiteralInteger"/>
+                <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="1"/>
+              </ownedEnd>
+            </packagedElement>
+            <packagedElement xsi:type="uml:Extension" name="extension_Translate_Operation" memberEnd="/0/com/googlecode/objectify/annotation/Translate/base_Operation /0/com/googlecode/objectify/annotation/extension_Translate_Operation/extension_Operation">
+              <ownedEnd xsi:type="uml:ExtensionEnd" name="extension_Operation" type="/0/com/googlecode/objectify/annotation/Translate" aggregation="composite" association="/0/com/googlecode/objectify/annotation/extension_Translate_Operation"/>
+            </packagedElement>
+            <packagedElement xsi:type="uml:Extension" name="extension_Translate_Property" memberEnd="/0/com/googlecode/objectify/annotation/Translate/base_Property.1 /0/com/googlecode/objectify/annotation/extension_Translate_Property.1/extension_Property">
+              <ownedEnd xsi:type="uml:ExtensionEnd" name="extension_Property" type="/0/com/googlecode/objectify/annotation/Translate" aggregation="composite" association="/0/com/googlecode/objectify/annotation/extension_Translate_Property.1">
+                <lowerValue xsi:type="uml:LiteralInteger"/>
+                <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="1"/>
+              </ownedEnd>
+            </packagedElement>
+            <packagedElement xsi:type="uml:Extension" name="extension_OnSave_Operation" memberEnd="/0/com/googlecode/objectify/annotation/OnSave/base_Operation /0/com/googlecode/objectify/annotation/extension_OnSave_Operation/extension_Operation">
+              <ownedEnd xsi:type="uml:ExtensionEnd" name="extension_Operation" type="/0/com/googlecode/objectify/annotation/OnSave" aggregation="composite" association="/0/com/googlecode/objectify/annotation/extension_OnSave_Operation"/>
+            </packagedElement>
+            <packagedElement xsi:type="uml:Extension" name="extension_OnSave_Property" memberEnd="/0/com/googlecode/objectify/annotation/OnSave/base_Property /0/com/googlecode/objectify/annotation/extension_OnSave_Property/extension_Property">
+              <ownedEnd xsi:type="uml:ExtensionEnd" name="extension_Property" type="/0/com/googlecode/objectify/annotation/OnSave" aggregation="composite" association="/0/com/googlecode/objectify/annotation/extension_OnSave_Property">
+                <lowerValue xsi:type="uml:LiteralInteger"/>
+                <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="1"/>
+              </ownedEnd>
+            </packagedElement>
+            <packagedElement xsi:type="uml:Extension" name="extension_Parent_Property" memberEnd="/0/com/googlecode/objectify/annotation/Parent/base_Property /0/com/googlecode/objectify/annotation/extension_Parent_Property/extension_Property">
+              <ownedEnd xsi:type="uml:ExtensionEnd" name="extension_Property" type="/0/com/googlecode/objectify/annotation/Parent" aggregation="composite" association="/0/com/googlecode/objectify/annotation/extension_Parent_Property"/>
+            </packagedElement>
+            <packagedElement xsi:type="uml:Extension" name="extension_Parent_EnumerationLiteral" memberEnd="/0/com/googlecode/objectify/annotation/Parent/base_EnumerationLiteral /0/com/googlecode/objectify/annotation/extension_Parent_EnumerationLiteral/extension_EnumerationLiteral">
+              <ownedEnd xsi:type="uml:ExtensionEnd" name="extension_EnumerationLiteral" type="/0/com/googlecode/objectify/annotation/Parent" aggregation="composite" association="/0/com/googlecode/objectify/annotation/extension_Parent_EnumerationLiteral">
+                <lowerValue xsi:type="uml:LiteralInteger"/>
+                <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="1"/>
+              </ownedEnd>
+            </packagedElement>
+            <packagedElement xsi:type="uml:Extension" name="extension_AlsoLoad_Property" memberEnd="/0/com/googlecode/objectify/annotation/AlsoLoad/base_Property /0/com/googlecode/objectify/annotation/extension_AlsoLoad_Property/extension_Property">
+              <ownedEnd xsi:type="uml:ExtensionEnd" name="extension_Property" type="/0/com/googlecode/objectify/annotation/AlsoLoad" aggregation="composite" association="/0/com/googlecode/objectify/annotation/extension_AlsoLoad_Property"/>
+            </packagedElement>
+            <packagedElement xsi:type="uml:Extension" name="extension_AlsoLoad_EnumerationLiteral" memberEnd="/0/com/googlecode/objectify/annotation/AlsoLoad/base_EnumerationLiteral /0/com/googlecode/objectify/annotation/extension_AlsoLoad_EnumerationLiteral/extension_EnumerationLiteral">
+              <ownedEnd xsi:type="uml:ExtensionEnd" name="extension_EnumerationLiteral" type="/0/com/googlecode/objectify/annotation/AlsoLoad" aggregation="composite" association="/0/com/googlecode/objectify/annotation/extension_AlsoLoad_EnumerationLiteral">
+                <lowerValue xsi:type="uml:LiteralInteger"/>
+                <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="1"/>
+              </ownedEnd>
+            </packagedElement>
+            <packagedElement xsi:type="uml:Extension" name="extension_AlsoLoad_Parameter" memberEnd="/0/com/googlecode/objectify/annotation/AlsoLoad/base_Parameter /0/com/googlecode/objectify/annotation/extension_AlsoLoad_Parameter/extension_Parameter">
+              <ownedEnd xsi:type="uml:ExtensionEnd" name="extension_Parameter" type="/0/com/googlecode/objectify/annotation/AlsoLoad" aggregation="composite" association="/0/com/googlecode/objectify/annotation/extension_AlsoLoad_Parameter"/>
+            </packagedElement>
+            <packagedElement xsi:type="uml:Extension" name="extension_EmbedMap_Property" memberEnd="/0/com/googlecode/objectify/annotation/EmbedMap/base_Property /0/com/googlecode/objectify/annotation/extension_EmbedMap_Property/extension_Property">
+              <ownedEnd xsi:type="uml:ExtensionEnd" name="extension_Property" type="/0/com/googlecode/objectify/annotation/EmbedMap" aggregation="composite" association="/0/com/googlecode/objectify/annotation/extension_EmbedMap_Property"/>
+            </packagedElement>
+            <packagedElement xsi:type="uml:Extension" name="extension_EmbedMap_EnumerationLiteral" memberEnd="/0/com/googlecode/objectify/annotation/EmbedMap/base_EnumerationLiteral /0/com/googlecode/objectify/annotation/extension_EmbedMap_EnumerationLiteral/extension_EnumerationLiteral">
+              <ownedEnd xsi:type="uml:ExtensionEnd" name="extension_EnumerationLiteral" type="/0/com/googlecode/objectify/annotation/EmbedMap" aggregation="composite" association="/0/com/googlecode/objectify/annotation/extension_EmbedMap_EnumerationLiteral">
+                <lowerValue xsi:type="uml:LiteralInteger"/>
+                <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="1"/>
+              </ownedEnd>
+            </packagedElement>
+            <packagedElement xsi:type="uml:Extension" name="extension_Index_Property" memberEnd="/0/com/googlecode/objectify/annotation/Index/base_Property /0/com/googlecode/objectify/annotation/extension_Index_Property/extension_Property">
+              <ownedEnd xsi:type="uml:ExtensionEnd" name="extension_Property" type="/0/com/googlecode/objectify/annotation/Index" aggregation="composite" association="/0/com/googlecode/objectify/annotation/extension_Index_Property"/>
+            </packagedElement>
+            <packagedElement xsi:type="uml:Extension" name="extension_Index_EnumerationLiteral" memberEnd="/0/com/googlecode/objectify/annotation/Index/base_EnumerationLiteral /0/com/googlecode/objectify/annotation/extension_Index_EnumerationLiteral/extension_EnumerationLiteral">
+              <ownedEnd xsi:type="uml:ExtensionEnd" name="extension_EnumerationLiteral" type="/0/com/googlecode/objectify/annotation/Index" aggregation="composite" association="/0/com/googlecode/objectify/annotation/extension_Index_EnumerationLiteral">
+                <lowerValue xsi:type="uml:LiteralInteger"/>
+                <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="1"/>
+              </ownedEnd>
+            </packagedElement>
+            <packagedElement xsi:type="uml:Extension" name="extension_Index_Type" memberEnd="/0/com/googlecode/objectify/annotation/Index/base_Type /0/com/googlecode/objectify/annotation/extension_Index_Type/extension_Type">
+              <ownedEnd xsi:type="uml:ExtensionEnd" name="extension_Type" type="/0/com/googlecode/objectify/annotation/Index" aggregation="composite" association="/0/com/googlecode/objectify/annotation/extension_Index_Type"/>
+            </packagedElement>
+            <packagedElement xsi:type="uml:Extension" name="extension_OnLoad_Operation" memberEnd="/0/com/googlecode/objectify/annotation/OnLoad/base_Operation /0/com/googlecode/objectify/annotation/extension_OnLoad_Operation/extension_Operation">
+              <ownedEnd xsi:type="uml:ExtensionEnd" name="extension_Operation" type="/0/com/googlecode/objectify/annotation/OnLoad" aggregation="composite" association="/0/com/googlecode/objectify/annotation/extension_OnLoad_Operation"/>
+            </packagedElement>
+            <packagedElement xsi:type="uml:Extension" name="extension_OnLoad_Property" memberEnd="/0/com/googlecode/objectify/annotation/OnLoad/base_Property /0/com/googlecode/objectify/annotation/extension_OnLoad_Property/extension_Property">
+              <ownedEnd xsi:type="uml:ExtensionEnd" name="extension_Property" type="/0/com/googlecode/objectify/annotation/OnLoad" aggregation="composite" association="/0/com/googlecode/objectify/annotation/extension_OnLoad_Property">
+                <lowerValue xsi:type="uml:LiteralInteger"/>
+                <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="1"/>
+              </ownedEnd>
+            </packagedElement>
+            <packagedElement xsi:type="uml:Extension" name="extension_Ignore_Property" memberEnd="/0/com/googlecode/objectify/annotation/Ignore/base_Property /0/com/googlecode/objectify/annotation/extension_Ignore_Property/extension_Property">
+              <ownedEnd xsi:type="uml:ExtensionEnd" name="extension_Property" type="/0/com/googlecode/objectify/annotation/Ignore" aggregation="composite" association="/0/com/googlecode/objectify/annotation/extension_Ignore_Property"/>
+            </packagedElement>
+            <packagedElement xsi:type="uml:Extension" name="extension_Ignore_EnumerationLiteral" memberEnd="/0/com/googlecode/objectify/annotation/Ignore/base_EnumerationLiteral /0/com/googlecode/objectify/annotation/extension_Ignore_EnumerationLiteral/extension_EnumerationLiteral">
+              <ownedEnd xsi:type="uml:ExtensionEnd" name="extension_EnumerationLiteral" type="/0/com/googlecode/objectify/annotation/Ignore" aggregation="composite" association="/0/com/googlecode/objectify/annotation/extension_Ignore_EnumerationLiteral">
+                <lowerValue xsi:type="uml:LiteralInteger"/>
+                <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="1"/>
+              </ownedEnd>
+            </packagedElement>
+            <packagedElement xsi:type="uml:Extension" name="extension_IgnoreSave_Property" memberEnd="/0/com/googlecode/objectify/annotation/IgnoreSave/base_Property /0/com/googlecode/objectify/annotation/extension_IgnoreSave_Property/extension_Property">
+              <ownedEnd xsi:type="uml:ExtensionEnd" name="extension_Property" type="/0/com/googlecode/objectify/annotation/IgnoreSave" aggregation="composite" association="/0/com/googlecode/objectify/annotation/extension_IgnoreSave_Property"/>
+            </packagedElement>
+            <packagedElement xsi:type="uml:Extension" name="extension_IgnoreSave_EnumerationLiteral" memberEnd="/0/com/googlecode/objectify/annotation/IgnoreSave/base_EnumerationLiteral /0/com/googlecode/objectify/annotation/extension_IgnoreSave_EnumerationLiteral/extension_EnumerationLiteral">
+              <ownedEnd xsi:type="uml:ExtensionEnd" name="extension_EnumerationLiteral" type="/0/com/googlecode/objectify/annotation/IgnoreSave" aggregation="composite" association="/0/com/googlecode/objectify/annotation/extension_IgnoreSave_EnumerationLiteral">
+                <lowerValue xsi:type="uml:LiteralInteger"/>
+                <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="1"/>
+              </ownedEnd>
+            </packagedElement>
+            <packagedElement xsi:type="uml:Extension" name="extension_Id_Property" memberEnd="/0/com/googlecode/objectify/annotation/Id/base_Property /0/com/googlecode/objectify/annotation/extension_Id_Property/extension_Property">
+              <ownedEnd xsi:type="uml:ExtensionEnd" name="extension_Property" type="/0/com/googlecode/objectify/annotation/Id" aggregation="composite" association="/0/com/googlecode/objectify/annotation/extension_Id_Property"/>
+            </packagedElement>
+            <packagedElement xsi:type="uml:Extension" name="extension_Id_EnumerationLiteral" memberEnd="/0/com/googlecode/objectify/annotation/Id/base_EnumerationLiteral /0/com/googlecode/objectify/annotation/extension_Id_EnumerationLiteral/extension_EnumerationLiteral">
+              <ownedEnd xsi:type="uml:ExtensionEnd" name="extension_EnumerationLiteral" type="/0/com/googlecode/objectify/annotation/Id" aggregation="composite" association="/0/com/googlecode/objectify/annotation/extension_Id_EnumerationLiteral">
+                <lowerValue xsi:type="uml:LiteralInteger"/>
+                <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="1"/>
+              </ownedEnd>
+            </packagedElement>
+            <packagedElement xsi:type="uml:Extension" name="extension_IgnoreLoad_Property" memberEnd="/0/com/googlecode/objectify/annotation/IgnoreLoad/base_Property /0/com/googlecode/objectify/annotation/extension_IgnoreLoad_Property/extension_Property">
+              <ownedEnd xsi:type="uml:ExtensionEnd" name="extension_Property" type="/0/com/googlecode/objectify/annotation/IgnoreLoad" aggregation="composite" association="/0/com/googlecode/objectify/annotation/extension_IgnoreLoad_Property"/>
+            </packagedElement>
+            <packagedElement xsi:type="uml:Extension" name="extension_IgnoreLoad_EnumerationLiteral" memberEnd="/0/com/googlecode/objectify/annotation/IgnoreLoad/base_EnumerationLiteral /0/com/googlecode/objectify/annotation/extension_IgnoreLoad_EnumerationLiteral/extension_EnumerationLiteral">
+              <ownedEnd xsi:type="uml:ExtensionEnd" name="extension_EnumerationLiteral" type="/0/com/googlecode/objectify/annotation/IgnoreLoad" aggregation="composite" association="/0/com/googlecode/objectify/annotation/extension_IgnoreLoad_EnumerationLiteral">
+                <lowerValue xsi:type="uml:LiteralInteger"/>
+                <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="1"/>
+              </ownedEnd>
+            </packagedElement>
+            <packagedElement xsi:type="uml:Extension" name="extension_EntitySubclass_Type" memberEnd="/0/com/googlecode/objectify/annotation/EntitySubclass/base_Type /0/com/googlecode/objectify/annotation/extension_EntitySubclass_Type/extension_Type">
+              <ownedEnd xsi:type="uml:ExtensionEnd" name="extension_Type" type="/0/com/googlecode/objectify/annotation/EntitySubclass" aggregation="composite" association="/0/com/googlecode/objectify/annotation/extension_EntitySubclass_Type"/>
+            </packagedElement>
+            <packagedElement xsi:type="uml:Extension" name="extension_Mapify_Property" memberEnd="/0/com/googlecode/objectify/annotation/Mapify/base_Property /0/com/googlecode/objectify/annotation/extension_Mapify_Property/extension_Property">
+              <ownedEnd xsi:type="uml:ExtensionEnd" name="extension_Property" type="/0/com/googlecode/objectify/annotation/Mapify" aggregation="composite" association="/0/com/googlecode/objectify/annotation/extension_Mapify_Property"/>
+            </packagedElement>
+            <packagedElement xsi:type="uml:Extension" name="extension_Mapify_EnumerationLiteral" memberEnd="/0/com/googlecode/objectify/annotation/Mapify/base_EnumerationLiteral /0/com/googlecode/objectify/annotation/extension_Mapify_EnumerationLiteral/extension_EnumerationLiteral">
+              <ownedEnd xsi:type="uml:ExtensionEnd" name="extension_EnumerationLiteral" type="/0/com/googlecode/objectify/annotation/Mapify" aggregation="composite" association="/0/com/googlecode/objectify/annotation/extension_Mapify_EnumerationLiteral">
+                <lowerValue xsi:type="uml:LiteralInteger"/>
+                <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="1"/>
+              </ownedEnd>
+            </packagedElement>
+            <packagedElement xsi:type="uml:Association" name="value_Load_Class" memberEnd="/0/com/googlecode/objectify/annotation/Load/value /0/com/googlecode/objectify/annotation/value_Load_Class/value_Load">
+              <ownedEnd name="value_Load" visibility="public" type="/0/com/googlecode/objectify/annotation/Load" association="/0/com/googlecode/objectify/annotation/value_Load_Class">
+                <lowerValue xsi:type="uml:LiteralInteger"/>
+                <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="1"/>
+              </ownedEnd>
+            </packagedElement>
+            <packagedElement xsi:type="uml:Association" name="unless_Load_Class" memberEnd="/0/com/googlecode/objectify/annotation/Load/unless /0/com/googlecode/objectify/annotation/unless_Load_Class/unless_Load">
+              <ownedEnd name="unless_Load" visibility="public" type="/0/com/googlecode/objectify/annotation/Load" association="/0/com/googlecode/objectify/annotation/unless_Load_Class">
+                <lowerValue xsi:type="uml:LiteralInteger"/>
+                <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="1"/>
+              </ownedEnd>
+            </packagedElement>
+            <packagedElement xsi:type="uml:Association" name="value_Unindex_Class" memberEnd="/0/com/googlecode/objectify/annotation/Unindex/value /0/com/googlecode/objectify/annotation/value_Unindex_Class/value_Unindex">
+              <ownedEnd name="value_Unindex" visibility="public" type="/0/com/googlecode/objectify/annotation/Unindex" association="/0/com/googlecode/objectify/annotation/value_Unindex_Class">
+                <lowerValue xsi:type="uml:LiteralInteger"/>
+                <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="1"/>
+              </ownedEnd>
+            </packagedElement>
+            <packagedElement xsi:type="uml:Association" name="value_Translate_Class" memberEnd="/0/com/googlecode/objectify/annotation/Translate/value /0/com/googlecode/objectify/annotation/value_Translate_Class/value_Translate">
+              <ownedEnd name="value_Translate" visibility="public" type="/0/com/googlecode/objectify/annotation/Translate" association="/0/com/googlecode/objectify/annotation/value_Translate_Class">
+                <lowerValue xsi:type="uml:LiteralInteger"/>
+                <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="1"/>
+              </ownedEnd>
+            </packagedElement>
+            <packagedElement xsi:type="uml:Association" name="value_Index_Class" memberEnd="/0/com/googlecode/objectify/annotation/Index/value /0/com/googlecode/objectify/annotation/value_Index_Class/value_Index">
+              <ownedEnd name="value_Index" visibility="public" type="/0/com/googlecode/objectify/annotation/Index" association="/0/com/googlecode/objectify/annotation/value_Index_Class">
+                <lowerValue xsi:type="uml:LiteralInteger"/>
+                <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="1"/>
+              </ownedEnd>
+            </packagedElement>
+            <packagedElement xsi:type="uml:Association" name="value_IgnoreSave_Class" memberEnd="/0/com/googlecode/objectify/annotation/IgnoreSave/value /0/com/googlecode/objectify/annotation/value_IgnoreSave_Class/value_IgnoreSave">
+              <ownedEnd name="value_IgnoreSave" visibility="public" type="/0/com/googlecode/objectify/annotation/IgnoreSave" association="/0/com/googlecode/objectify/annotation/value_IgnoreSave_Class">
+                <lowerValue xsi:type="uml:LiteralInteger"/>
+                <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="1"/>
+              </ownedEnd>
+            </packagedElement>
+            <packagedElement xsi:type="uml:Association" name="value_Mapify_Class" memberEnd="/0/com/googlecode/objectify/annotation/Mapify/value /0/com/googlecode/objectify/annotation/value_Mapify_Class/value_Mapify">
+              <ownedEnd name="value_Mapify" visibility="public" type="/0/com/googlecode/objectify/annotation/Mapify" association="/0/com/googlecode/objectify/annotation/value_Mapify_Class">
+                <lowerValue xsi:type="uml:LiteralInteger"/>
+                <upperValue xsi:type="uml:LiteralUnlimitedNatural" value="1"/>
+              </ownedEnd>
+            </packagedElement>
+          </packagedElement>
+        </packagedElement>
+      </packagedElement>
+    </packagedElement>
+    <profileApplication>
+      <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references href="pathmap://JAVA_PROFILE/javaProfile.uml#_wCcqIN0oEeSfefuUt0TgMw"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://JAVA_PROFILE/javaProfile.uml#_LICG-bmhEeKP6JNTocDZqQ"/>
+    </profileApplication>
+  </uml:Profile>
+  <javaProfile:JProfile base_Package="/0"/>
+  <javaProfile:JGenericType base_Property="/0/com/googlecode/objectify/annotation/Mapify/value" type="upperBounded"/>
+  <javaProfile:JGenericType base_Property="/0/com/googlecode/objectify/annotation/Translate/value" type="upperBounded"/>
+</xmi:XMI>

@@ -1,0 +1,402 @@
+--/*******************************************************************************
+-- * Copyright (c) 2014 Vienna University of Technology.
+-- * All rights reserved. This program and the accompanying materials
+-- * are made available under the terms of the Eclipse Public License v1.0
+-- * which accompanies this distribution, and is available at
+-- * http://www.eclipse.org/legal/epl-v10.html
+-- *
+-- * Contributors:
+-- * Alexander Bergmayr (Vienna University of Technology) - initial API and implementation
+-- *
+-- * Initially developed in the context of ARTIST EU project www.artist-project.eu
+-- *******************************************************************************/
+
+-- @atlcompiler emftvm
+-- @nsURI UMLMM=http://www.eclipse.org/uml2/4.0.0/UML
+
+module ObjectifyGetterSetter;
+create UMLM_OUT : UMLMM, UML_UTIL_OUT : UMLMM refining UMLM: UMLMM, UML_UTIL : UMLMM, Refinement : UMLMM, OBJECTIFY : UMLMM, objectifyTypes : UMLMM, javaUtil : UMLMM, javaLang : UMLMM;
+uses CommonLibrary;
+uses CommonGetterSetter;
+
+rule ModelStereotype {
+	from inModel : UMLMM!Model in UMLM (inModel.oclIsTypeOf(UMLMM!Model))
+	to toModel : UMLMM!Model()
+	do {
+		toModel.applyProfile(thisModule.GetProfile('OBJECTIFY'));
+	}
+}
+
+-- @extends AbstractAppendGetterAndSetterExtended
+rule AnnotateEmbeddedEntities {
+	from
+		inClass : UMLMM!Class(inClass.owner.isStereotypeApplied(thisModule.GetStereotype('Refinement', 'DomainPackage')) and inClass.isEmbeddedType())
+	to 
+		outClass : UMLMM!Class ()
+	do {
+		-- if the class is in a composite relationship then we apply the @Embed stereotype
+		outClass.applyStereotype(thisModule.GetStereotype('OBJECTIFY', 'Embed'));	
+		
+	}
+}
+
+-- @extends AbstractAppendGetterAndSetterExtended
+rule AnnotateEntities {
+	from
+		inClass : UMLMM!Class(inClass.owner.isStereotypeApplied(thisModule.GetStereotype('Refinement', 'DomainPackage')) and inClass.isEntityType())
+	to 
+		outClass : UMLMM!Class ()
+	do {
+		
+		outClass.applyStereotype(thisModule.GetStereotype('OBJECTIFY', 'Entity'));	
+		
+		
+		for(prop in outClass.ownedAttribute) {
+			if(prop.isID) {
+				prop.type <- UMLMM!Class.allInstancesFrom('javaLang') -> any(c|c.name = 'Long');
+				prop.applyStereotype(thisModule.GetStereotype('OBJECTIFY', 'Id'));	
+			}
+		}
+	}
+}
+
+--rule CopyParameters {
+--	from
+--		inParam : UMLMM!Parameter in UMLM (inParam.getNearestPackage().isStereotypeApplied(thisModule.GetStereotype('Refinement', 'ServicePackage')))
+--	to
+--		outParam : UMLMM!Parameter
+--		, outParam2 : UMLMM!Parameter(
+--			name <- inParam.name
+--			, type <- inParam.type
+--			, direction <- inParam.direction
+--			, lower <- inParam.lower
+--			, upper <- inParam.upper
+--		)
+--}
+--
+--rule CopyInterfaceOperation {
+--	from
+--		inOp : UMLMM!Operation in UMLM (inOp.getNearestPackage().isStereotypeApplied(thisModule.GetStereotype('Refinement', 'ServicePackage')))
+--	to 
+--		outOp : UMLMM!Operation ()
+--		, outOp2 : UMLMM!Operation(
+--			name <- inOp.name
+--			, ownedParameter <- inOp.ownedParameter -> collect(p|thisModule.resolveTemp(p, 'outParam2'))
+--			, redefinedOperation <- Sequence{inOp}
+--		)
+--}
+--
+--rule RealizeInterface {
+--	from
+--		inInter : UMLMM!Interface (inInter.owner.isStereotypeApplied(thisModule.GetStereotype('Refinement', 'ServicePackage')))
+--	using {
+--		className : String = inInter.name.replaceAll('Service', '');
+--		concreteOperations : Sequence(UMLMM!Operation) = Sequence{}
+----			Sequence{thisModule.CreateServiceOperation(inClass), thisModule.CreateFindByIdServiceOperation(inClass), 
+----		                           thisModule.CreateFindAllServiceOperation(inClass), thisModule.CreateUpdateServiceOperation(inClass),
+----							       thisModule.CreateRemoveServiceOperation(inClass)}
+--		;
+--	}
+--	to 
+--		outInter : UMLMM!Interface ()
+--		
+--		, realization : UMLMM!InterfaceRealization (
+--		client <- Sequence {implClass}
+--		, supplier <- Sequence {outInter}
+--		, contract <- outInter
+--	)
+--	
+----	, ofyImport: UMLMM!ElementImport(
+----		importedElement <- thisModule.resolveTemp(inInter.owner, 'ofyClass')
+----	)
+--	
+--	, implClass : UMLMM!Class(
+--   		name <- inInter.name.concat('Impl')
+--		, interfaceRealization <- Sequence{realization}
+--   		, ownedBehavior <- Sequence{createBH, findBH, findAllBH, updateBH, removeBH}
+--   		, ownedOperation <- inInter.ownedOperation -> collect(o|thisModule.resolveTemp(o, 'outOp2'))
+--   		, elementImport <- Sequence{
+--   			thisModule.CreateElementImport('javaUtil', 'ArrayList')
+--			--, ofyImport
+--		}
+--		
+--	)
+--	
+--	, createBH: UMLMM!OpaqueBehavior(
+--		language <- Sequence{'JAVA'}
+--		, body <- Sequence{'
+--			if (entityToCreate != null) {
+--				// TODO: Provide business logic if required
+--				// finally the entity is stored - synchronous approach
+--				OfyService.ofy().save().entity(entityToCreate).now();
+--			} else {
+--		
+--				// TODO: Exception handling if the entity is null
+--			}
+--		
+--			return entityToCreate;
+--		'}
+--	)
+--	
+--	, findBH: UMLMM!OpaqueBehavior(
+--		language <- Sequence{'JAVA'}
+--		, body <- Sequence{'
+--			return OfyService.ofy().load().type('.concat(className).concat('.class).filter("id", entityId).first().now();
+--		')}
+--	)
+--	
+--	, findAllBH: UMLMM!OpaqueBehavior(
+--		language <- Sequence{'JAVA'}
+--		, body <- Sequence{'
+--			List<'.concat(className).concat('> list = new ArrayList<').concat(className).concat('>();
+--			list.addAll(OfyService.ofy().load().type(').concat(className).concat('.class).list());
+--			return list;
+--		')}
+--	)
+--	
+--	, updateBH: UMLMM!OpaqueBehavior(
+--		language <- Sequence{'JAVA'}
+--		, body <- Sequence{'
+--			if (entityToUpdate != null) {
+--				// TODO: Provide business logic if required
+--				// finally the entity is stored - synchronous approach
+--				OfyService.ofy().save().entity(entityToUpdate).now();
+--			} else {
+--		
+--				// TODO: Exception handling if the entity is null
+--			}
+--		
+--			return entityToUpdate;
+--		'}
+--	)
+--	
+--	, removeBH: UMLMM!OpaqueBehavior(
+--		language <- Sequence{'JAVA'}
+--		, body <- Sequence{'
+--			if (entityToRemove != null) {
+--				// TODO: Provide business logic if required
+--				// finally the entity is stored - synchronous approach
+--				OfyService.ofy().delete().type('.concat(className).concat('.class).id(entityToRemove.getId()).now();  // synchronous
+--			} else {
+--		
+--				// TODO: Exception handling if the entity is null
+--			}
+--		')}
+--	)
+--		
+--	do {
+--		
+--		for(operation in implClass.ownedOperation) {
+--			if(operation.name.startsWith('create')) {
+--				operation.method <- Sequence{createBH};
+--			} else if(operation.name.startsWith('findAll')) {
+--				operation.method <- Sequence{findAllBH};
+--			} else if(operation.name.startsWith('find')) {
+--				operation.method <- Sequence{findBH};
+--			} else if(operation.name.startsWith('update')) {
+--				operation.method <- Sequence{updateBH};
+--			} else if(operation.name.startsWith('remove')) {
+--				operation.method <- Sequence{removeBH};
+--			}
+--		}	
+--	}
+--}
+
+
+-- @extends AbstractSimpleProperty
+rule SimpleProperty {
+	from
+		inProp : UMLMM!Property in UMLM (
+			if (not inProp.type.oclIsTypeOf(UMLMM!Class)) then
+				not inProp.refImmediateComposite().oclIsTypeOf(UMLMM!Association) and not inProp.isMultivalued()
+			else
+				not inProp.refImmediateComposite().oclIsTypeOf(UMLMM!Association) and not inProp.isMultivalued() and not inProp.type.isEntityType()
+			endif
+		)
+	to 
+		outProp : UMLMM!Property
+}
+
+-- @extends AbstractSimpleClassProperty
+rule SimpleClassProperty {
+	from
+		inProp : UMLMM!Property in UMLM (
+			if (inProp.type.oclIsTypeOf(UMLMM!Class)) then
+				not inProp.refImmediateComposite().oclIsTypeOf(UMLMM!Association) and not inProp.isMultivalued() and inProp.type.isEntityType()
+			else
+				false
+			endif
+		)
+	to 
+		outProp : UMLMM!Property
+}
+
+-- @extends AbstractMultiValuedProperty
+rule MultiValuedProperty {
+	from
+		inProp : UMLMM!Property in UMLM (inProp.oclIsTypeOf(UMLMM!Property) and not inProp.refImmediateComposite().oclIsTypeOf(UMLMM!Association) and inProp.isMultivalued())
+	to 
+		outProp : UMLMM!Property
+}
+
+--rule CollectServiceClasses {
+--	from s : UMLMM!Package in UMLM (s.isStereotypeApplied(thisModule.GetStereotype('Refinement', 'ServicePackage')))
+--	to t : UMLMM!Package(
+--			packagedElement <- s.packagedElement
+----				.union(Sequence{
+----					ofyClass
+----				})
+--				.union(
+--				s.ownedElement
+--					-> select(c|c.oclIsTypeOf(UMLMM!Interface))
+--					-> collect(e|thisModule.resolveTemp(e, 'implClass'))
+--				).union(
+--					s.ownedElement
+--						-> select(c|c.oclIsTypeOf(UMLMM!Interface))
+--						-> collect(e|thisModule.resolveTemp(e, 'realization'))
+--				)
+--		)
+--	
+----		, opOfy : UMLMM!Operation(
+----			name <- 'ofy'
+----		)
+----		
+----		, ofyClass : UMLMM!Class(
+----			name <- 'OfyService'
+----			, ownedOperation <- Sequence{opOfy}
+----		)
+--	
+----	   , t1: UMLMM!Package(
+----	   		name <- 'service'
+----			, packagedElement <- Sequence{
+----	   			ofyClass
+----			}.union(
+----				s.ownedElement
+----					-> select(c|c.oclIsTypeOf(UMLMM!Class))
+----					-> select(c|c.isEntityType())
+----					-> collect(e|thisModule.resolveTemp(e.debug(), 'implClass'))
+----			).union(
+----				s.ownedElement
+----					-> select(c|c.oclIsTypeOf(UMLMM!Class))
+----					-> select(c|c.isEntityType())
+----					-> collect(e|thisModule.resolveTemp(e.debug(), 'inter'))
+----			).union(
+----				s.ownedElement
+----					-> select(c|c.oclIsTypeOf(UMLMM!Class))
+----					-> select(c|c.isEntityType())
+----					-> collect(e|thisModule.resolveTemp(e.debug(), 'realization'))
+----			)
+----			 , packagedElement <- Sequence{}.union(s.ownedElement -> collect(e|thisModule.ree.isStereotypeApplied(thisModule.stereotypes -> any(e | e.name = 'Entity'))) ->
+----							   collect(e|thisModule.ObjectifiedClass(e))).flatten()
+----	   )
+--	do {
+--		-- t.refImmediateComposite().packagedElement <- Sequence{t, t1};
+--		--t1.applyProfile(thisModule.GetProfile('Refinement'));
+--		--t1.applyStereotype(thisModule.GetStereotype('Refinement', 'ServicePackage'));
+--		
+--	}
+--}
+--
+----rule CreateServiceOperation(s : UMLMM!Class) {
+----	to t : UMLMM!Operation (
+----		name <- 'create'.concat(s.name)
+----	)
+----	do {
+----		t.ownedParameter <- Sequence {thisModule.CreateParameter('entityToCreate', s, 'in', 1, false),
+----		                              thisModule.CreateParameter('createdEntity', s, 'return', 1, false)};
+----		                            
+----		t;
+----	}
+----}
+----
+----unique lazy rule getUtilClass {
+----	from utilIn : UMLMM!Class
+----	to 
+----	 tmplClass : UMLMM!Class in UML_UTIL (
+----		name <- 'List<'.concat(utilIn.name).concat('>')
+----		, package <- UMLMM!Model.allInstancesFrom('UML_UTIL') -> first()
+----		, templateBinding <- Sequence{thisModule.CreateTemplateBinding(
+----			'javaUtil'
+----			, 'List'
+----			, thisModule.CreateParameterSubstituion(utilIn, 'javaUtil', 'List')
+----		)}
+----	)
+----
+----	do {
+----	}
+----}
+----
+----rule CreateFindByIdServiceOperation(s : UMLMM!Class) {  	
+----	to t : UMLMM!Operation (
+----		name <- 'find'.concat(s.name)
+----	)
+----	do {
+----		t.ownedParameter <- Sequence {thisModule.CreateParameter('entityId', s.ownedAttribute -> any(p | p.isID).type, 'in', 1, false),
+----		                              thisModule.CreateParameter('retrievedEntity', s, 'return', 0, false)};
+----		t;
+----	}
+----}
+----
+----rule CreateFindAllServiceOperation(s : UMLMM!Class) {
+----	using {
+----		
+----		listClass : UMLMM!Class = if(not UMLMM!Class.allInstancesFrom('UML_UTIL') -> exists(c|c.name = 'List<'.concat(s.name).concat('>'))) then
+----			thisModule.getUtilClass(s)
+----		else
+----			UMLMM!Class.allInstancesFrom('UML_UTIL') -> any(c|c.name = 'List<'.concat(s.name).concat('>'))
+----		endif;
+----		
+------		listClass : UMLMM!Class = if(not UMLMM!Class.allInstancesFrom('UML_UTIL') -> exists(c|c.name = 'List<'.concat(s.name).concat('>'))) then
+------			thisModule.CreateTemplateClass(
+------				'List<'.concat(s.name).concat('>')
+------				, thisModule.CreateTemplateBinding(
+------					'javaUtil'
+------					, 'List'
+------					, thisModule.CreateParameterSubstituion(s, 'javaUtil', 'List')
+------				)
+------				, UMLMM!Model.allInstancesFrom('UML_UTIL') -> first()
+------			)
+------		else
+------			UMLMM!Class.allInstancesFrom('UML_UTIL') -> any(c|c.name = 'List<'.concat(s.name).concat('>'))
+------		endif;
+----	}
+----	to
+----		t : UMLMM!Operation (
+----			name <- 'findAll'.concat(s.name)
+----		)
+----		
+----	do {
+----		
+----		--s.refImmediateComposite().packagedElement .debug('UUU');
+----		
+----		if (not UMLMM!Class.allInstancesFrom('UML_UTIL') -> exists(c|c.name = 'List<'.concat(s.name).concat('>'))) {
+----			thisModule.getUtilClass(s);
+----			t.ownedParameter <- Sequence{thisModule.CreateParameter('retrievedEntities', thisModule.resolveTemp(s, 'getUtilClass', 'tmplClass'), 'return', 'read', 0, true)};
+----		} else {
+----			t.ownedParameter <- Sequence{thisModule.CreateParameter('retrievedEntities', UMLMM!Class.allInstancesFrom('UML_UTIL') -> any(c|c.name = 'List<'.concat(s.name).concat('>')), 'return', 0, true)};
+----		}
+----		
+----		t;
+----	}
+----}
+----
+----rule CreateUpdateServiceOperation(s : UMLMM!Class) {
+----	to t : UMLMM!Operation (
+----		name <- 'update'.concat(s.name)
+----	)
+----	do {
+----		t.ownedParameter <- Sequence {thisModule.CreateParameter('entityToUpdate', s, 'in', 1, false),
+----			                          thisModule.CreateParameter('updatedEntity', s, 'return', 1, false)};	
+----		t;	
+----	}
+----}
+----
+----rule CreateRemoveServiceOperation(s : UMLMM!Class) {  	
+----	to t : UMLMM!Operation (
+----		name <- 'remove'.concat(s.name)
+----	)
+----	do {
+----		t.ownedParameter <- Sequence{thisModule.CreateParameter('entityToRemove', s, 'in', 1, false)};	
+----		t;	
+----	}	
+----}

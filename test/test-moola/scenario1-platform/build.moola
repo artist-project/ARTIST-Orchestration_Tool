@@ -1,0 +1,49 @@
+// if you want to have more output on the console
+loglevel "verbose"
+
+/* Models */
+modeltypes (
+	UMLMM: "http://www.eclipse.org/uml2/5.0.0/UML",
+	TMM: "platform:/plugin/eu.artist.migration.model.trace/model/Trace.ecore",
+	JMM: "http://www.eclipse.org/MoDisco/Java/0.2.incubation/java"
+)
+
+// optional - only required if we want to store the result of the discovery
+// model ( name: "codeModel", type: "JMM", path: "test-moola/scenario1-platform/output/test.xmi" )
+
+model ( name: "jp", type: "UMLMM", path: "pathmap://JAVA_PROFILE/javaProfile.uml" )
+model ( name: "jpt", type: "UMLMM", path: "pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml" )
+model ( name: "mc", type: "UMLMM", path: "pathmap://UML_METAMODELS/UML.metamodel.uml" )
+model ( name: "upt", type: "UMLMM", path: "pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml" )
+model ( name: "ept", type: "UMLMM", path: "pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml" )
+
+model ( name: "up", type: "UMLMM", path: "test-moola/scenario1-platform/output/up_output.uml" )
+// optional - only required if we want to store the result of the discovery
+// model ( name: "tm", type: "TMM", path: "test-moola/scenario1-platform/output/tm_out.xmi" )
+
+/* Operations */
+operation ( name: "DISCOVER_JAVA", type: "MoDisco" ) { }
+
+operation ( name: "CODE_TO_UML", type: "ATL" ){
+	spec {
+		inputs CM: "JMM", JP: "UMLMM", JPT: "UMLMM", MC: "UMLMM", UPT: "UMLMM", EPT: "UMLMM"
+		outputs UP: "UMLMM", TM: "TMM"
+	}
+	path "platform:/plugin/eu.artist.migration.transformation.fe/trafo/CodeModel2UMLProfile.atl"
+	option "supportUML2Stereotypes", "true"
+	option "allowInterModelReferences", "true"
+	library "javaLibrary", "platform:/plugin/eu.artist.migration.transformation.fe/trafo/javaLibrary.asm"
+	library "profileLibrary", "platform:/plugin/eu.artist.migration.transformation.fe/trafo/profileLibrary.asm"
+}
+
+
+/* Orchestration */
+
+run {
+	codeModel = DISCOVER_JAVA("objectify")
+
+	( up, tm ) = CODE_TO_UML( codeModel, jp, jpt, mc, upt, ept )
+	save up
+}
+	
+	

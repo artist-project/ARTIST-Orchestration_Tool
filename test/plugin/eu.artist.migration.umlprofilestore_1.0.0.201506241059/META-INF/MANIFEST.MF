@@ -1,0 +1,22 @@
+Manifest-Version: 1.0
+Bundle-SymbolicName: eu.artist.migration.umlprofilestore;singleton:=tr
+ ue
+Export-Package: eu.artist.migration.umlprofilestore,eu.artist.migratio
+ n.umlprofilestore.impl,eu.artist.migration.umlprofilestore.util
+Bundle-Name: UML-Profile-Store
+Bundle-Version: 1.0.0.201506241059
+Bundle-ClassPath: umlprofiles/,bin/
+Require-Bundle: org.eclipse.emf.ecore;bundle-version="2.8.3",org.eclip
+ se.uml2.uml;bundle-version="4.0.0",org.eclipse.uml2.uml.resources;bun
+ dle-version="4.0.0",org.eclipse.core.runtime;bundle-version="3.9.0",o
+ rg.eclipse.pde.core;bundle-version="3.9.1",org.eclipse.ui.console,org
+ .eclipse.jface;bundle-version="3.9.1",eu.artist.migration.model.resou
+ rces;bundle-version="1.0.0"
+Bundle-ManifestVersion: 2
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
+Bundle-Activator: eu.artist.migration.umlprofilestore.UMLProfileStoreP
+ lugin
+Bundle-Vendor: TUWien
+
+
